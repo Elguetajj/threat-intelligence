@@ -1,0 +1,48 @@
+
+version: "3"
+services: 
+
+  mysqldb:
+    image: mysql:5.7
+    restart: always
+    environment:
+        MYSQL_ROOT_PASSWORD: 123
+    volumes:
+        - ./db/init:/docker-entrypoint-initdb.d/:ro
+        - ./db/data:/var/lib/mysql
+    ports:
+        - 3306:3306
+    networks:
+        - threat_radar_net
+  
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+    - 8383:8080
+    networks: 
+    - threat_radar_net
+  
+  backend:
+    build: ./backend
+    ports:
+      - 80:80
+    depends_on:
+      - mysqldb
+    networks:
+      - threat_radar_net
+
+  frontend:
+    build: ./frontend
+    ports: 
+      - 3000:3000
+    depends_on:
+      - mysqldb
+      - backend
+    networks:
+      - threat_radar_net
+
+
+networks:
+    threat_radar_net:
+        driver: "bridge"

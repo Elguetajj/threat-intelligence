@@ -1,13 +1,13 @@
-# pull official base image
-FROM node:13.12.0-alpine
 
-COPY ./app /app
+FROM node:16.13.0
+
+COPY ./ /notus-react-main
 
 # set working directory
-WORKDIR /app
+WORKDIR /notus-react-main
 
 # add `/app/node_modules/.bin` to $PATH
-ENV PATH /app/node_modules/.bin:$PATH
+ENV PATH /notus-reacr-main/node_modules/.bin:$PATH
 
 # install app dependencies
 RUN npm install --silent

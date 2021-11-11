@@ -2,7 +2,7 @@ from fastapi import APIRouter, Depends, HTTPException
 from fastapi_utils.cbv import cbv
 from sqlalchemy.orm import Session
 from controllers.app_controller import get_all_apps, create_app, get_app_info_by_id, update_app_info, delete_app_info
-from db import get_db
+from models.db import get_db
 from controllers.exceptions import AppInfoException
 from models.schemas import App, CreateAndUpdateApp, PaginatedAppInfo
 

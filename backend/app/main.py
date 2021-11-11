@@ -1,10 +1,14 @@
 from fastapi import FastAPI
-import routes.app_router as app_router
+import routes.app_router
+import routes.cve_router
 
 
-app = FastAPI()
 
-app.include_router(app_router.router)
+app = FastAPI(debug=True)
+
+app.include_router(routes.app_router.router)
+app.include_router(routes.cve_router.router)
+
 
 @app.get("/")
 async def root():

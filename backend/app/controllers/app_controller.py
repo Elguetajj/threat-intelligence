@@ -1,7 +1,7 @@
 from typing import List
 from sqlalchemy.orm import Session
-from backend.app.models.schemas import App
-from exceptions import AppInfoInfoAlreadyExistError, AppInfoNotFoundError
+from models.schemas import App
+from .exceptions import AppInfoInfoAlreadyExistError, AppInfoNotFoundError
 from models.models import AppInfo
 from models.schemas import CreateAndUpdateApp
 

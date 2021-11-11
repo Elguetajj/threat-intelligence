@@ -1,7 +1,7 @@
 from sqlalchemy.schema import Column
 from sqlalchemy.sql.sqltypes import DateTime
 from sqlalchemy.types import String, Integer, Enum
-from db import Base
+from .db import Base
 import enum
 
 class AppInfo(Base):

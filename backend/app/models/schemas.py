@@ -1,9 +1,8 @@
 from pydantic import BaseModel
-from models import FuelType
 from typing import Optional, List
 
 
-class CreateAndUpdateApp(BaseException):
+class CreateAndUpdateApp(BaseModel):
     name : str 
     os_cpe : str 
     app_cpe : str
@@ -12,6 +11,7 @@ class App(CreateAndUpdateApp):
     id: int
     
     class Config:
+        arbitrary_types_allowed = True
         orm_mode = True
 
 class PaginatedAppInfo(BaseModel):
@@ -21,7 +21,7 @@ class PaginatedAppInfo(BaseModel):
 
 
 
-class CreateAndUpdateCve(BaseException):
+class CreateAndUpdateCve(BaseModel):
     cve_id : str
     assigner : str
     description : str
@@ -33,11 +33,12 @@ class CreateAndUpdateCve(BaseException):
 
 class Cve(CreateAndUpdateCve):
     id: int
-    
+
     class Config:
+        arbitrary_types_allowed = True
         orm_mode = True
 
-class PaginatedAppInfo(BaseModel):
+class PaginatedCveInfo(BaseModel):
     limit: int
     offset: int
     data: List[Cve]

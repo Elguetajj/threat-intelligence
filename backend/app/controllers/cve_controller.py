@@ -17,6 +17,11 @@ def get_cve_info_by_id(session: Session, _id: int) -> CveInfo:
 
     return cve_info
 
+def get_tracked_cves(session: Session) -> List[CveInfo]:
+    cve_info = session.query(CveInfo).filter(CveInfo.tracked == True).all()
+    return cve_info
+
+
 def create_cve(session: Session, cve_info: CreateAndUpdateCve) -> CveInfo:
     cve_details = session.query(CveInfo).filter(
         CveInfo.cve_id == cve_info.cve_id,
@@ -30,6 +35,7 @@ def create_cve(session: Session, cve_info: CreateAndUpdateCve) -> CveInfo:
     session.commit()
     session.refresh(new_cve_info)
     return new_cve_info
+
 
 def update_cve_info(session: Session, _id: int, info_update: CreateAndUpdateCve) -> CveInfo:
     cve_info = get_cve_info_by_id(session, _id)
@@ -48,6 +54,34 @@ def update_cve_info(session: Session, _id: int, info_update: CreateAndUpdateCve)
     cve_info.external_links = info_update.external_links 
     cve_info.published_date = info_update.published_date
     cve_info.last_modified_date = info_update.last_modified_date
+    cve_info.tracked = info_update.tracked
+
+
+    session.commit()
+    session.refresh(cve_info)
+
+    return cve_info
+
+def delete_cve_info(session: Session, _id: int):
+    cve_info = get_cve_info_by_id(session, _id)
+
+    if cve_info is None:
+        raise CveInfoNotFoundError
+
+    session.delete(cve_info)
+    session.commit()
+
+    return
+
+def track_cve(session: Session, _id: int) -> CveInfo:
+    cve_info = get_cve_info_by_id(session, _id)
+
+    if cve_info is None:
+        raise CveInfoNotFoundError
+
+   
+    cve_info.tracked = 1
+
 
     session.commit()
     session.refresh(cve_info)

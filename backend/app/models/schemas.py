@@ -36,6 +36,7 @@ class CreateAndUpdateCve(BaseModel):
     external_links : Optional[List[str]]        
     published_date: datetime
     last_modified_date: datetime
+    tracked: Optional[bool]
 
 class Cve(CreateAndUpdateCve):
     id: int

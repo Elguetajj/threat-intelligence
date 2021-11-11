@@ -1,6 +1,6 @@
 from pydantic.types import Json
 from sqlalchemy.schema import Column
-from sqlalchemy.sql.sqltypes import JSON, DateTime
+from sqlalchemy.sql.sqltypes import JSON, Boolean, DateTime
 from sqlalchemy.types import String, Integer, Enum
 from .db import Base
 import enum
@@ -37,6 +37,7 @@ class CveInfo(Base):
     external_links = Column(JSON)
     published_date = Column(DateTime)
     last_modified_date = Column(DateTime)
+    tracked = Column(Boolean)
     created = Column(DateTime)
 
 

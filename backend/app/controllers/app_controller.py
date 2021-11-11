@@ -19,8 +19,7 @@ def get_app_info_by_id(session: Session, _id: int) -> AppInfo:
 
 def create_app(session: Session, app_info: CreateAndUpdateApp) -> AppInfo:
     app_details = session.query(AppInfo).filter(
-        AppInfo.app_cpe == app_info.app_cpe,
-        AppInfo.os_cpe == app_info.os_cpe
+        AppInfo.cpe == app_info.cpe,
         ).first()
     
     if app_details is not None:

@@ -23,6 +23,7 @@ CREATE TABLE tracked_cves(
 	`external_links` JSON,
 	`published_date` DATETIME NULL DEFAULT NULL ,
 	`last_modified_date` DATETIME NULL DEFAULT NULL,
+	`tracked` TINYINT,
 	created TIMESTAMP DEFAULT NOW(),
 	PRIMARY KEY (id)
 

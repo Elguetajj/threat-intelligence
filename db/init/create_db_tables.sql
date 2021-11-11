@@ -1,12 +1,12 @@
 CREATE DATABASE configs;
 USE configs;
 
+
 CREATE TABLE apps (
 	id INTEGER NOT NULL AUTO_INCREMENT, 
 	`name` VARCHAR(100),
-	`os_cpe` VARCHAR(100) ,
-	`app_cpe` VARCHAR(100),
-    created TIMESTAMP,
+	`cpe` VARCHAR(100) ,
+    created TIMESTAMP DEFAULT NOW(),
 	PRIMARY KEY (id)
 );
 
@@ -16,22 +16,16 @@ CREATE TABLE tracked_cves(
 	`assigner` VARCHAR(100) ,
 	`description` TEXT,
 	`severity` VARCHAR(100),
+	`attack_vector` VARCHAR(100),
 	`confidentiality_impact` VARCHAR(100),
 	`integrity_impact` VARCHAR(100),
 	`availability_impact` VARCHAR(100),
-	`external_links` VARCHAR(100),
-    created TIMESTAMP,
+	`external_links` JSON,
+	`published_date` DATETIME NULL DEFAULT NULL ,
+	`last_modified_date` DATETIME NULL DEFAULT NULL,
+	created TIMESTAMP DEFAULT NOW(),
 	PRIMARY KEY (id)
 
 );
--- class App(Base):
---     id = Column(Integer, primary_key=True, index=True)
---     cve_id = Column(String)
---     assigner = Column(String)
---     description = Column(String)
---     severity = Column(String)
---     confidentiality_impact = Column(String)
---     integrity_impact = Column(String)
---     availability_impact = Column(String)
---     external_links = Column(String)
---     created = Column(DateTime)
+
+

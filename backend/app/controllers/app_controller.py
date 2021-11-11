@@ -39,8 +39,7 @@ def update_app_info(session: Session, _id: int, info_update: CreateAndUpdateApp)
         raise AppInfoNotFoundError
 
     app_info.name = info_update.name
-    app_info.os_cpe = info_update.os_cpe
-    app_info.app_cpe = info_update.app_cpe
+    app_info.cpe = info_update.cpe
 
     session.commit()
     session.refresh(app_info)

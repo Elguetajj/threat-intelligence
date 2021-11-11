@@ -41,10 +41,13 @@ def update_cve_info(session: Session, _id: int, info_update: CreateAndUpdateCve)
     cve_info.assigner = info_update.assigner 
     cve_info.description = info_update.description 
     cve_info.severity = info_update.severity 
+    cve_info.attack_vector = info_update.attack_vector
     cve_info.confidentiality_impact = info_update.confidentiality_impact 
     cve_info.integrity_impact = info_update.integrity_impact 
     cve_info.availability_impact = info_update.availability_impact 
     cve_info.external_links = info_update.external_links 
+    cve_info.published_date = info_update.published_date
+    cve_info.last_modified_date = info_update.last_modified_date
 
     session.commit()
     session.refresh(cve_info)

@@ -1,5 +1,6 @@
+from pydantic.types import Json
 from sqlalchemy.schema import Column
-from sqlalchemy.sql.sqltypes import DateTime
+from sqlalchemy.sql.sqltypes import JSON, DateTime
 from sqlalchemy.types import String, Integer, Enum
 from .db import Base
 import enum
@@ -9,8 +10,7 @@ class AppInfo(Base):
 
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
-    os_cpe = Column(String)
-    app_cpe = Column(String)
+    cpe = Column(String)
     created = Column(DateTime)
 
 # CREATE TABLE apps (
@@ -30,10 +30,13 @@ class CveInfo(Base):
     assigner = Column(String)
     description = Column(String)
     severity = Column(String)
+    attack_vector = Column(String)
     confidentiality_impact = Column(String)
     integrity_impact = Column(String)
     availability_impact = Column(String)
-    external_links = Column(String)
+    external_links = Column(JSON)
+    published_date = Column(DateTime)
+    last_modified_date = Column(DateTime)
     created = Column(DateTime)
 
 
@@ -42,6 +45,14 @@ class CveInfo(Base):
 # 	`cve_id` VARCHAR(100),
 # 	`assigner` VARCHAR(100) ,
 # 	`description` TEXT,
+# 	`severity` VARCHAR(100),
+# 	`attack_vector` VARCHAR(100),
+# 	`confidentiality_impact` VARCHAR(100),
+# 	`integrity_impact` VARCHAR(100),
+# 	`availability_impact` VARCHAR(100),
+# 	`external_links` JSON,
+# 	'published_date' TIMESTAMP ,
+# 	'last_modified_date' TIMESTAMP,
 #     created TIMESTAMP,
 # 	PRIMARY KEY (id)
 

@@ -1,11 +1,14 @@
+from datetime import datetime
 from pydantic import BaseModel
+
 from typing import Optional, List
+
+from pydantic.types import Json
 
 
 class CreateAndUpdateApp(BaseModel):
     name : str 
-    os_cpe : str 
-    app_cpe : str
+    cpe : str 
 
 class App(CreateAndUpdateApp):
     id: int
@@ -26,10 +29,13 @@ class CreateAndUpdateCve(BaseModel):
     assigner : str
     description : str
     severity : str
+    attack_vector: str
     confidentiality_impact : str
     integrity_impact : str
-    availability_impact : str
-    external_links : str
+    availability_impact : str  
+    external_links : Optional[List[str]]        
+    published_date: datetime
+    last_modified_date: datetime
 
 class Cve(CreateAndUpdateCve):
     id: int
